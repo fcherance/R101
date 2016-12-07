@@ -34,11 +34,11 @@ EPL_stats$DIFF_AVG <- EPL_stats$GOAL.DIFFERENCE / EPL_stats$PLAYED
 # EPL Fixtures Predictions ------------------------------------------------
 
 home_team <- EPL_fixtures %>%
-              html_nodes(".table-stats~ .table-stats .team-home a") %>%
+              html_nodes(".team-home a") %>%
               html_text()
 
 away_team <- EPL_fixtures %>%
-              html_nodes(".table-stats~ .table-stats .team-away a") %>%
+              html_nodes(".team-away a") %>%
               html_text()
 
 fixtures <- data.table(Home=home_team,Away=away_team)
@@ -73,4 +73,4 @@ fixtures$Home_Goals[i] <- floor(fixtures$Home_Expect[i])
 fixtures$Away_Goals[i] <- floor(fixtures$Away_Expect[i])
 }
 
-write.csv(fixtures[,1:4,with=F],"Desktop/EPL_Predictions_FC.csv",row.names = F)
+write.csv(fixtures[,1:4,with=F],paste("Desktop/EPL_Predictions_FC",Sys.Date(),".csv"),row.names = F)
